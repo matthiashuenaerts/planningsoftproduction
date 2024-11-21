@@ -1,3 +1,120 @@
+/* Algemene opmaak */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f7fa;
+    color: #333;
+}
+
+h1, h2, h3 {
+    font-family: 'Arial', sans-serif;
+}
+
+a {
+    text-decoration: none;
+    color: white;
+}
+
+header {
+    background-color: #4CAF50;
+    padding: 15px 0;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+}
+
+    .navbar ul {
+        display: flex;
+        list-style-type: none;
+    }
+
+    .navbar li {
+        margin-right: 20px;
+    }
+
+        .navbar li:last-child {
+            margin-right: 0;
+        }
+
+    .navbar a {
+        color: white;
+        font-size: 16px;
+        transition: color 0.3s ease;
+    }
+
+        .navbar a:hover {
+            color: #ffcc00;
+        }
+
+.login-form {
+    background-color: white;
+    max-width: 400px;
+    margin: 100px auto;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+    .login-form h2 {
+        margin-bottom: 20px;
+    }
+
+    .login-form label {
+        font-size: 16px;
+        display: block;
+        margin-top: 10px;
+        text-align: left;
+    }
+
+    .login-form input {
+        width: 100%;
+        padding: 10px;
+        margin-top: 5px;
+        font-size: 14px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+    }
+
+    .login-form button {
+        background-color: #4CAF50;
+        color: white;
+        padding: 10px 20px;
+        font-size: 18px;
+        border-radius: 5px;
+        width: 100%;
+        margin-top: 20px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+        .login-form button:hover {
+            background-color: #45a049;
+        }
+
+footer {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 15px;
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+}
+
+    footer p {
+        font-size: 14px;
+    }
+
 /* Basisopmaak */
 * {
     margin: 0;
