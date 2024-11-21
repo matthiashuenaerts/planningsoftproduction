@@ -3,36 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PlanningSoftProduction - Dashboard</title>
+    <title>Dashboard - PlanningSoftProduction</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <header>
-        <div class="navbar">
-            <div class="logo">
-                <h1>PlanningSoftProduction</h1>
-            </div>
-            <nav>
-                <ul>
-                    <li><a href="#">Home</a></li>
-                    <li><a href="#">Planning</a></li>
-                    <li><a href="#">Rapporten</a></li>
-                    <li><a href="#">Uitloggen</a></li>
-                </ul>
-            </nav>
-        </div>
-    </header>
+    <!-- Sidebar -->
+    <div id="sidebar" class="sidebar">
+        <h2>Menu</h2>
+        <ul>
+            <li><a href="#" onclick="setCurrentPage('Home')">Home</a></li>
+            <li><a href="#" onclick="setCurrentPage('Faseopvolging')">Faseopvolging</a></li>
+            <li><a href="#" onclick="setCurrentPage('Dagplanning')">Dagplanning</a></li>
+            <li><a href="#" onclick="setCurrentPage('Projectoverzicht')">Projectoverzicht</a></li>
+            <li><a href="#" onclick="setCurrentPage('Bestellingen')">Bestellingen</a></li>
+            <li><a href="#" onclick="setCurrentPage('Batchlijst')">Batchlijst</a></li>
+            <li><a href="#" onclick="setCurrentPage('Broken Parts')">Broken Parts</a></li>
+            <li><a href="#" onclick="setCurrentPage('Chat')">Chat</a></li>
+            <li><a href="#" onclick="setCurrentPage('Kantenband')">Kantenband</a></li>
+        </ul>
+        <button class="logout-button" onclick="onLogout()">Uitloggen</button>
+    </div>
 
-    <main>
-        <section class="hero">
-            <h2>Welkom bij je Dashboard</h2>
-            <p>Beheer en optimaliseer je productieplanning met PlanningSoftProduction.</p>
-        </section>
-    </main>
-
-    <footer>
-        <p>&copy; 2024 PlanningSoftProduction. Alle rechten voorbehouden.</p>
-    </footer>
+    <!-- Content -->
+    <div id="content" class="content">
+        <h1>Welkom bij je Dashboard</h1>
+        <p>Beheer je planning en productie vanuit dit overzicht.</p>
+    </div>
 
     <script src="script.js"></script>
 </body>

@@ -1,70 +1,24 @@
-// Inloglogica
-document.getElementById("login-form").addEventListener("submit", function(event) {
-    event.preventDefault();
+// Login functionaliteit
+document.getElementById('login-form')?.addEventListener('submit', function(event) {
+    event.preventDefault(); // Voorkom standaard formulier versturen
 
-    // Verkrijg de gebruikersnaam en het wachtwoord
-    var username = document.getElementById("username").value;
-    var password = document.getElementById("password").value;
+    const username = document.getElementById('username').value;
+    const password = document.getElementById('password').value;
 
-    // Voorbeeld van inloggegevens (je kunt dit vervangen door een serververificatie)
-    var validUsername = "admin";
-    var validPassword = "password123";
-
-    // Vergelijk de ingevoerde gegevens met de voorbeeldgegevens
-    if (username === validUsername && password === validPassword) {
-        // Als de inloggegevens correct zijn, ga dan naar de hoofdpagina
-        window.location.href = "dashboard.html"; // Dit is de pagina die de gebruiker na inloggen ziet
+    // Inloggegevens controleren
+    if (username === 'user' && password === 'password123') {
+        window.location.href = 'dashboard.html'; // Doorgaan naar dashboard bij succesvolle login
     } else {
-        // Als de inloggegevens incorrect zijn, toon een foutmelding
-        document.getElementById("error-message").style.display = "block";
+        document.getElementById('login-error').classList.remove('hidden'); // Toon foutmelding
     }
 });
 
-
-// Variabele voor de huidige breedte van de sidebar
-let sidebarWidth = 250;
-
-// Functie om de huidige pagina te veranderen
+// Dashboard functionaliteit
 function setCurrentPage(page) {
-    const content = document.getElementById("content");
-    content.innerHTML = `<h1>${page}</h1><p>Beheer je ${page} vanuit dit overzicht.</p>`;
+    document.getElementById('content').innerHTML = `<h1>${page}</h1><p>Inhoud van ${page} wordt hier weergegeven.</p>`;
 }
 
-// Functie om uit te loggen
+// Uitlogfunctie
 function onLogout() {
-    alert("Je bent uitgelogd!");
-    // Je zou hier de gebruiker kunnen omleiden naar de inlogpagina
+    window.location.href = 'index.html'; // Terug naar inlogpagina bij uitloggen
 }
-
-// Functie om de breedte van de sidebar aan te passen
-function initSidebarResizer() {
-    const sidebar = document.getElementById("sidebar");
-    const sidebarResizer = document.getElementById("sidebar-resizer");
-
-    sidebarResizer.addEventListener("mousedown", (e) => {
-        e.preventDefault();
-        const startX = e.clientX;
-        const startWidth = sidebarWidth;
-
-        // Mousemove handler voor het slepen
-        const onMouseMove = (moveEvent) => {
-            const newWidth = startWidth + (moveEvent.clientX - startX);
-            if (newWidth >= 150 && newWidth <= 500) {
-                sidebar.style.width = newWidth + "px";
-                sidebarWidth = newWidth; // Werk de sidebar breedte bij
-            }
-        };
-
-        // Stop het slepen
-        const onMouseUp = () => {
-            window.removeEventListener("mousemove", onMouseMove);
-            window.removeEventListener("mouseup", onMouseUp);
-        };
-
-        window.addEventListener("mousemove", onMouseMove);
-        window.addEventListener("mouseup", onMouseUp);
-    });
-}
-
-// Initialiseer de resizer bij het laden van de pagina
-window.onload = initSidebarResizer;
