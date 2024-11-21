@@ -7,9 +7,11 @@ document.getElementById('login-form')?.addEventListener('submit', function(event
 
     // Inloggegevens controleren
     if (username === 'user' && password === 'password123') {
-        window.location.href = 'dashboard.html'; // Doorgaan naar dashboard bij succesvolle login
+        // Doorgaan naar dashboard
+        window.location.href = 'dashboard.html';
     } else {
-        document.getElementById('login-error').classList.remove('hidden'); // Toon foutmelding
+        // Toon foutmelding als inloggen mislukt
+        document.getElementById('login-error').classList.remove('hidden');
     }
 });
 
