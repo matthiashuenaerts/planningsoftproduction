@@ -1,6 +1,8 @@
 const express = require('express');
 const mysql = require('mysql2');
 const cors = require('cors');
+const https = require('https');
+const fs = require('fs');
 const app = express();
 const port = 3000;
 
@@ -37,6 +39,14 @@ app.get('/api/projects', (req, res) => {
         res.json(results);  // Stuurt de resultaten terug naar de frontend
     });
 });
+
+
+// Zorg ervoor dat je SSL-certificaat correct instelt
+const sslOptions = {
+    key: fs.readFileSync('path_to_your_key.pem'),
+    cert: fs.readFileSync('path_to_your_cert.pem')
+};
+
 
 // Start de server en stel deze in om via je IP-adres toegankelijk te zijn
 app.listen(port, '0.0.0.0', () => {
