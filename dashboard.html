@@ -37,41 +37,60 @@
     <script>
         // Functie om de pagina-inhoud bij te werken
         function setCurrentPage(page) {
+            const contentDiv = document.getElementById('content');
+
             if (page === 'Home') {
-                loadProjects(); // Laad de projecten wanneer de gebruiker "Home" selecteert
+                // Voeg de datagrid toe voor de Home pagina
+                contentDiv.innerHTML = `
+            <h1>${page}</h1>
+            <p>Inhoud van ${page} wordt hier weergegeven.</p>
+            <table id="datagrid">
+                <thead>
+                    <tr>
+                        <th>ProjectId</th>
+                        <th>ProjectString</th>
+                        <th>ProjectPartnerNumber</th>
+                        <th>ProjectType</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- De gegevens worden hier via JavaScript geladen -->
+                </tbody>
+            </table>
+        `;
+
+                // Hier kun je de functie aanroepen om gegevens uit je database op te halen en weer te geven in de datagrid
+                loadDataGrid();
             } else {
-                document.getElementById('content').innerHTML = `<h1>${page}</h1><p>Inhoud van ${page} wordt hier weergegeven.</p>`;
+                contentDiv.innerHTML = `<h1>${page}</h1><p>Inhoud van ${page} wordt hier weergegeven.</p>`;
             }
         }
 
+
         // Functie om projecten uit de database op te halen en in een datagrid weer te geven
-        function loadProjects() {
-            fetch('http://localhost:3000/api/projects')
+        function loadDataGrid() {
+            fetch('http://localhost:3000/api/projects')  // Dit is de URL van je backend-endpoint voor het ophalen van projectgegevens
                 .then(response => response.json())
                 .then(data => {
-                    let datagridHtml = '<h2>Projecten</h2>';
-                    datagridHtml += '<table border="1"><thead><tr><th>Project ID</th><th>Project String</th><th>Project Partner Number</th><th>Project Type</th></tr></thead><tbody>';
+                    const tableBody = document.querySelector('#datagrid tbody');
+                    tableBody.innerHTML = '';  // Maak de bestaande inhoud van de tabel leeg
 
-                    // Voeg elke project rij toe
                     data.forEach(project => {
-                        datagridHtml += `
-                                <tr>
-                                    <td>${project.projectId}</td>
-                                    <td>${project.projectString}</td>
-                                    <td>${project.projectPartnerNumber}</td>
-                                    <td>${project.projectType}</td>
-                                </tr>
-                            `;
+                        const row = document.createElement('tr');
+                        row.innerHTML = `
+                    <td>${project.projectId}</td>
+                    <td>${project.projectString}</td>
+                    <td>${project.projectPartnerNumber}</td>
+                    <td>${project.projectType}</td>
+                `;
+                        tableBody.appendChild(row);
                     });
-
-                    datagridHtml += '</tbody></table>';
-                    document.getElementById('datagrid-container').innerHTML = datagridHtml;
                 })
                 .catch(error => {
-                    console.error('Fout bij het ophalen van projecten:', error);
-                    document.getElementById('datagrid-container').innerHTML = '<p>Er is een fout opgetreden bij het laden van de projecten.</p>';
+                    console.error('Fout bij het ophalen van gegevens:', error);
                 });
         }
+
 
         // Uitlogfunctie
         function onLogout() {

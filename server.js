@@ -2,31 +2,32 @@ const express = require('express');
 const mysql = require('mysql2');
 const cors = require('cors');
 
-// Maak verbinding met de MySQL database
-const db = mysql.createConnection({
+const app = express();
+const port = 3000;
+
+// Zorg ervoor dat CORS werkt voor je frontend
+app.use(cors());
+
+// MySQL verbinding
+const connection = mysql.createConnection({
     host: '192.168.1.48',
-    port: 3306,
     user: 'Matthias',
     password: 'MattiWoodDesign0831',
-    database: 'planningsoftproduction' // Verander dit naar je werkelijke database naam
+    database: 'planningsoftproduction' // Zorg ervoor dat dit de juiste database is
 });
 
-const app = express();
-app.use(cors());
-app.use(express.json());
-
-// API endpoint om projecten op te halen
+// Route om de projectgegevens op te halen
 app.get('/api/projects', (req, res) => {
-    const query = 'SELECT projectId, projectString, projectPartnerNumber, projectType FROM projects';
-    db.query(query, (err, results) => {
+    connection.query('SELECT projectId, projectString, projectPartnerNumber, projectType FROM projects', (err, results) => {
         if (err) {
-            return res.status(500).send('Error retrieving projects');
+            res.status(500).json({ error: 'Fout bij ophalen van projecten' });
+            return;
         }
-        res.json(results);
+        res.json(results);  // Stuurt de resultaten terug naar de frontend
     });
 });
 
 // Start de server
-app.listen(3000, () => {
-    console.log('Server running on http://localhost:3000');
+app.listen(port, () => {
+    console.log(`Server running on http://localhost:${port}`);
 });
