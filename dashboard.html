@@ -69,7 +69,7 @@
 
         // Functie om projecten uit de database op te halen en in een datagrid weer te geven
         function loadDataGrid() {
-            fetch('http://localhost:3000/api/projects')  // Dit is de URL van je backend-endpoint voor het ophalen van projectgegevens
+            fetch('http://192.168.1.48:3000/api/projects')
                 .then(response => response.json())
                 .then(data => {
                     const tableBody = document.querySelector('#datagrid tbody');
