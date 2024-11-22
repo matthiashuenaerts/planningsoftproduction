@@ -112,3 +112,26 @@ body {
     margin-left: 270px;
     padding: 20px;
 }
+
+
+/* Styling voor de datagrid */
+.data-grid {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+    .data-grid th, .data-grid td {
+        padding: 10px;
+        border: 1px solid #ccc;
+        text-align: left;
+    }
+
+    .data-grid th {
+        background-color: #4CAF50;
+        color: white;
+    }
+
+    .data-grid tr:nth-child(even) {
+        background-color: #f2f2f2;
+    }
