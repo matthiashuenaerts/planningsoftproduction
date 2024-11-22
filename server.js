@@ -37,6 +37,7 @@ app.get('/api/projects', (req, res) => {
             res.status(500).json({ error: 'Fout bij ophalen van projecten' });
             return;
         }
+        console.log(results);  // Log de resultaten naar de console om te controleren
         res.json(results);  // Stuurt de resultaten terug naar de frontend
     });
 });

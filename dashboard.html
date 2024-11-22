@@ -116,17 +116,20 @@
         }
 
 
-
         // Functie om projecten uit de database op te halen en in een datagrid weer te geven
         function loadDataGrid() {
             fetch('http://localhost:3000/api/projects')  // Dit is de URL van je backend-endpoint voor het ophalen van projectgegevens
                 .then(response => response.json())
                 .then(data => {
+                    console.log(data);  // Log de ontvangen data om te controleren
+
                     const tableBody = document.querySelector('#datagrid tbody');
                     tableBody.innerHTML = '';  // Maak de bestaande inhoud van de tabel leeg
 
                     data.forEach(project => {
                         const row = document.createElement('tr');
+
+                        // Voeg de projectdata toe aan de tabelrij
                         row.innerHTML = `
                     <td>${project.projectId}</td>
                     <td>${project.projectString}</td>
@@ -181,6 +184,28 @@
                     <td>${project.projectPhase43}</td>
                     <td>${project.projectPhase44}</td>
                 `;
+
+                        // Functie om de kleur van de cellen aan te passen op basis van de waarde
+                        function setCellColor(phaseValue, cell) {
+                            if (phaseValue === '1') {
+                                cell.style.backgroundColor = 'red';
+                                cell.style.color = 'white';
+                            } else if (phaseValue === '0') {
+                                cell.style.backgroundColor = 'yellow';
+                                cell.style.color = 'black';
+                            } else {
+                                cell.style.backgroundColor = 'green';
+                                cell.style.color = 'white';
+                            }
+                        }
+
+                        // Pas de kleur toe voor elke projectPhase kolom (phase1 tot phase44)
+                        for (let i = 1; i <= 44; i++) {
+                            const phaseCell = row.children[i + 7]; // Omdat de eerste 8 kolommen niet de phases zijn
+                            const phaseValue = project[`projectPhase${i}`];
+                            setCellColor(phaseValue, phaseCell);
+                        }
+
                         tableBody.appendChild(row);
                     });
                 })
@@ -188,6 +213,7 @@
                     console.error('Fout bij het ophalen van gegevens:', error);
                 });
         }
+
 
 
 
