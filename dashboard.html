@@ -70,15 +70,15 @@
 
         // Functie om projecten uit de database op te halen en in een datagrid weer te geven
         function loadDataGrid() {
-            console.log('Laad gegevens...'); // Debugging log
             fetch('http://192.168.1.48:3000/api/projects')
                 .then(response => response.json())
                 .then(data => {
-                    console.log('Gegevens opgehaald:', data); // Debugging log
+                    console.log('Gegevens opgehaald:', data);  // Controleer of de data hier juist is
                     const tableBody = document.querySelector('#datagrid tbody');
                     tableBody.innerHTML = '';  // Maak de bestaande inhoud van de tabel leeg
 
                     data.forEach(project => {
+                        console.log('Rij toevoegen:', project);  // Log voor elke rij die wordt toegevoegd
                         const row = document.createElement('tr');
                         row.innerHTML = `
                     <td>${project.projectId}</td>
@@ -93,6 +93,7 @@
                     console.error('Fout bij het ophalen van gegevens:', error);
                 });
         }
+
 
 
 
