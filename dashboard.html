@@ -28,8 +28,55 @@
     <div id="content" class="content">
         <h1>Welkom bij je Dashboard</h1>
         <p>Beheer je planning en productie vanuit dit overzicht.</p>
+
+        <!-- Datagrid voor projecten (komt hier dynamisch) -->
+        <div id="datagrid-container"></div>
     </div>
 
     <script src="script.js"></script>
+    <script>
+        // Functie om de pagina-inhoud bij te werken
+        function setCurrentPage(page) {
+            if (page === 'Home') {
+                loadProjects(); // Laad de projecten wanneer de gebruiker "Home" selecteert
+            } else {
+                document.getElementById('content').innerHTML = `<h1>${page}</h1><p>Inhoud van ${page} wordt hier weergegeven.</p>`;
+            }
+        }
+
+        // Functie om projecten uit de database op te halen en in een datagrid weer te geven
+        function loadProjects() {
+            fetch('http://localhost:3000/api/projects')
+                .then(response => response.json())
+                .then(data => {
+                    let datagridHtml = '<h2>Projecten</h2>';
+                    datagridHtml += '<table border="1"><thead><tr><th>Project ID</th><th>Project String</th><th>Project Partner Number</th><th>Project Type</th></tr></thead><tbody>';
+
+                    // Voeg elke project rij toe
+                    data.forEach(project => {
+                        datagridHtml += `
+                                <tr>
+                                    <td>${project.projectId}</td>
+                                    <td>${project.projectString}</td>
+                                    <td>${project.projectPartnerNumber}</td>
+                                    <td>${project.projectType}</td>
+                                </tr>
+                            `;
+                    });
+
+                    datagridHtml += '</tbody></table>';
+                    document.getElementById('datagrid-container').innerHTML = datagridHtml;
+                })
+                .catch(error => {
+                    console.error('Fout bij het ophalen van projecten:', error);
+                    document.getElementById('datagrid-container').innerHTML = '<p>Er is een fout opgetreden bij het laden van de projecten.</p>';
+                });
+        }
+
+        // Uitlogfunctie
+        function onLogout() {
+            window.location.href = 'index.html'; // Terug naar inlogpagina bij uitloggen
+        }
+    </script>
 </body>
 </html>
