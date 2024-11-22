@@ -8,7 +8,7 @@ const db = mysql.createConnection({
     port: 3306,
     user: 'Matthias',
     password: 'MattiWoodDesign0831',
-    database: 'your_database_name' // Verander dit naar je werkelijke database naam
+    database: 'planningsoftproduction' // Verander dit naar je werkelijke database naam
 });
 
 const app = express();
