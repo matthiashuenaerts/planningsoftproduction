@@ -42,23 +42,22 @@
             if (page === 'Home') {
                 // Voeg de datagrid toe voor de Home pagina
                 contentDiv.innerHTML = `
-                <h1>${page}</h1>
-                <p>Inhoud van ${page} wordt hier weergegeven.</p>
-                <table id="datagrid">
-                    <thead>
-                        <tr>
-                            <th>ProjectId</th>
-                            <th>ProjectString</th>
-                            <th>ProjectPartnerNumber</th>
-                            <th>ProjectType</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <!-- De gegevens worden hier via JavaScript geladen -->
-                    </tbody>
-                </table>
-            `;
-
+            <h1>${page}</h1>
+            <p>Inhoud van ${page} wordt hier weergegeven.</p>
+            <table id="datagrid">
+                <thead>
+                    <tr>
+                        <th>ProjectId</th>
+                        <th>ProjectString</th>
+                        <th>ProjectPartnerNumber</th>
+                        <th>ProjectType</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- De gegevens worden hier via JavaScript geladen -->
+                </tbody>
+            </table>
+        `;
 
                 // Hier kun je de functie aanroepen om gegevens uit je database op te halen en weer te geven in de datagrid
                 loadDataGrid();
@@ -70,12 +69,10 @@
 
         // Functie om projecten uit de database op te halen en in een datagrid weer te geven
         function loadDataGrid() {
-            console.log('Laad gegevens...'); // Debugging log
-            fetch('http://192.168.1.48:3000/api/projects')
+            fetch('http://localhost:3000/api/projects')  // Dit is de URL van je backend-endpoint voor het ophalen van projectgegevens
                 .then(response => response.json())
                 .then(data => {
-                    console.log('Gegevens opgehaald:', data); // Debugging log
-const tableBody = document.querySelector('#datagrid tbody');
+                    const tableBody = document.querySelector('#datagrid tbody');
                     tableBody.innerHTML = '';  // Maak de bestaande inhoud van de tabel leeg
 
                     data.forEach(project => {
@@ -93,7 +90,6 @@ const tableBody = document.querySelector('#datagrid tbody');
                     console.error('Fout bij het ophalen van gegevens:', error);
                 });
         }
-
 
 
         // Uitlogfunctie
