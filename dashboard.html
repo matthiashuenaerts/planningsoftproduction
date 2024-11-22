@@ -74,6 +74,10 @@
                 .then(response => response.json())
                 .then(data => {
                     console.log('Gegevens opgehaald:', data);  // Controleer of de data hier juist is
+                    if (!data || data.length === 0) {
+                        console.log('Geen projecten gevonden!');
+                        return;
+                    }
                     const tableBody = document.querySelector('#datagrid tbody');
                     tableBody.innerHTML = '';  // Maak de bestaande inhoud van de tabel leeg
 
