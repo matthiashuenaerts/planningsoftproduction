@@ -42,30 +42,29 @@
             if (page === 'Home') {
                 // Voeg de datagrid toe voor de Home pagina
                 contentDiv.innerHTML = `
-                <h1>${page}</h1>
-                <p>Inhoud van ${page} wordt hier weergegeven.</p>
-                <table id="datagrid">
-                    <thead>
-                        <tr>
-                            <th>ProjectId</th>
-                            <th>ProjectString</th>
-                            <th>ProjectPartnerNumber</th>
-                            <th>ProjectType</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <!-- De gegevens worden hier via JavaScript geladen -->
-                    </tbody>
-                </table>
-            `;
-
-
-                // Hier kun je de functie aanroepen om gegevens uit je database op te halen en weer te geven in de datagrid
-                loadDataGrid();
+            <h1>${page}</h1>
+            <p>Inhoud van ${page} wordt hier weergegeven.</p>
+            <table id="datagrid">
+                <thead>
+                    <tr>
+                        <th>ProjectId</th>
+                        <th>ProjectString</th>
+                        <th>ProjectPartnerNumber</th>
+                        <th>ProjectType</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- De gegevens worden hier via JavaScript geladen -->
+                </tbody>
+            </table>
+        `;
+                // Wacht tot de inhoud geladen is en roep de functie aan
+                setTimeout(loadDataGrid, 100);  // Zorg ervoor dat de datagrid wordt geladen nadat de pagina is weergegeven
             } else {
                 contentDiv.innerHTML = `<h1>${page}</h1><p>Inhoud van ${page} wordt hier weergegeven.</p>`;
             }
         }
+
 
 
         // Functie om projecten uit de database op te halen en in een datagrid weer te geven
